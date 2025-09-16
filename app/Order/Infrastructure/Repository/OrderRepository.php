@@ -58,7 +58,11 @@ readonly class OrderRepository
             $this->pdo->commit();
 
             $now = new DateTimeImmutable('now');
-            $orderNumber = sprintf('%s-%s-%d', $now->format('Y'), $now->format('m'), $orderId);
+            $orderNumber = OrderNumber::compose(
+                (int)$now->format('Y'),
+                (int)$now->format('m'),
+                $orderId
+            )->value();
 
             return new Order(
                 id: $orderId,
@@ -131,7 +135,7 @@ readonly class OrderRepository
                 (int)$createdAt->format('Y'),
                 (int)$createdAt->format('m'),
                 $id
-            );
+            )->value();
 
             return new Order(
                 id: $id,

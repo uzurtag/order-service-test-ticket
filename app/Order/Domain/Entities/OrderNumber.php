@@ -34,6 +34,11 @@ final readonly class OrderNumber
         return $this->value;
     }
 
+    public function __toString(): string
+    {
+        return $this->value;
+    }
+
     public function year(): int
     {
         return $this->year;
